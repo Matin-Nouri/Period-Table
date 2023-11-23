@@ -23,6 +23,8 @@ try:
 except ValueError:
     user_input = str(user_input[0]).upper() + str(user_input[1:]).lower()
 
+
+
 if user_input is str and user_input.len() > 2:
     print("Symbol should be write correctly!")
     exit()
@@ -52,12 +54,6 @@ for i in data:
 
     print(f"{str(i[0]).upper()}{str(i[1:])} : {data[i]}")
 
-url = data['source']
-pdfkit.from_url(url, f'{path_out}{data["name"]}_wiki.pdf')
-
-ul = f'https://images-of-elements.com/{str(data["name"]).lower()}.php'
-pdfkit.from_url(ul, f'{path_out}{data["name"]}_element.pdf')
-
 with open(f'{path_out}{data["name"]}.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     
@@ -70,3 +66,10 @@ with open(f'{path_out}{data["name"]}.csv', 'w', newline='') as file:
 df1 = pd.read_csv(f'{path_out}{data["name"]}.csv')
 html_string = df1.to_html()
 pdfkit.from_string(html_string, f'{path_out}{data["name"]}.pdf')
+
+url = data['source']
+pdfkit.from_url(url, f'{path_out}{data["name"]}_wiki.pdf')
+
+ul = f'https://images-of-elements.com/{str(data["name"]).lower()}.php'
+pdfkit.from_url(ul, f'{path_out}{data["name"]}_element.pdf')
+
