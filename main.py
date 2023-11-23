@@ -21,7 +21,7 @@ user_input = input("Please Enter Atom Number or Symbol Correctly: ")
 try:
     user_input = int(user_input)
 except ValueError:
-    user_input = str(user_input)
+    user_input = str(user_input[0]).upper() + str(user_input[1:]).lower()
 
 if user_input is str and user_input.len() > 2:
     print("Symbol should be write correctly!")
