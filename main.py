@@ -47,10 +47,6 @@ for i in data:
         open(path, 'wb').write(r.content)
         continue
     if i== 'bohr_model_3d':
-        url = data[i]
-        r = requests.get(url, allow_redirects=True)
-        path = f'{path_out}{data["name"]}-3d.png'
-        open(path, 'wb').write(r.content)
         continue
     if i == 'image':
         continue
@@ -69,12 +65,6 @@ with open(f'{path_out}{data["name"]}.csv', 'w', newline='') as file:
             newsort = sort.split()
             newsort.sort(key=get_number)
             writer.writerow(["Sorted electron configuration", " ".join(newsort)])
-        if i == 'electron_configuration_semantic':
-            sort2 = data['electron_configuration_semantic']
-            newsort2 = sort2.split()
-            ssort = newsort2[1:]
-            ssort.sort(key=get_number)
-            writer.writerow(["Sorted electron configuration semantic", " ".join(newsort2)])
         if i == 'source' or i == 'bohr_model_image' or i == 'bohr_model_3d' or i=='spectral_img':
             continue
         writer.writerow([ f"{str(i[0]).upper()}{str(i[1:]).replace('_',' ')}" , data[i]])
