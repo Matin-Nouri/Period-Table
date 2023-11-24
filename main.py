@@ -4,6 +4,9 @@ from os import system,name
 import pandas as pd
 import csv
 
+def get_number(x):
+    return x[0]
+
 if name=="posix":
     system("cd out ; rm -rf *")
 else:
@@ -59,7 +62,22 @@ with open(f'{path_out}{data["name"]}.csv', 'w', newline='') as file:
     
     writer.writerow(["Subject", "Value"])
     for i in data:
-        writer.writerow([ f"{str(i[0]).upper()}{str(i[1:])}" , data[i]])
+        if i == 'image':
+            continue
+        if i == 'electron_configuration':
+            sort = data['electron_configuration']
+            newsort = sort.split()
+            newsort.sort(key=get_number)
+            writer.writerow(["Sorted electron configuration", " ".join(newsort)])
+        if i == 'electron_configuration_semantic':
+            sort2 = data['electron_configuration_semantic']
+            newsort2 = sort2.split()
+            ssort = newsort2[1:]
+            ssort.sort(key=get_number)
+            writer.writerow(["Sorted electron configuration semantic", " ".join(newsort2)])
+        if i == 'source' or i == 'bohr_model_image' or i == 'bohr_model_3d' or i=='spectral_img':
+            continue
+        writer.writerow([ f"{str(i[0]).upper()}{str(i[1:]).replace('_',' ')}" , data[i]])
     
     file.close()
 
