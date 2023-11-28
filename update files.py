@@ -39,8 +39,8 @@ for ui in range(118):
     atom = AtomObject(user_input)
     atom.Get_Data()
     data = atom.Get_Data()
-    system(f'mkdir {data["name"]} {data["number"]}')
-    system(f'cd {data["name"]} {data["number"]}')
+    system(f'mkdir {data["name"]}_{data["number"]}')
+    system(f'cd {data["name"]}_{data["number"]}')
     path_out = f'./downloads/{data["name"]}_{data["number"]}'
     for i in data:
         if i == 'bohr_model_image':
