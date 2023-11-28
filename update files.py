@@ -19,8 +19,6 @@ if name=='posix':
 else:
     path_out = '.\\downloads\\'
 
-user_input = input("Please Enter Atom Number or Symbol Correctly: ")
-
 for ui in range(118):
     user_input = ui+1
     try:
