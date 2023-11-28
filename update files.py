@@ -41,11 +41,14 @@ for ui in range(118):
     atom = AtomObject(user_input)
     atom.Get_Data()
     data = atom.Get_Data()
+    system(f'mkdir {data["name"]} {data["number"]}')
+    system(f'cd {data["name"]} {data["number"]}')
+    path_out = f'./downloads/{data["name"]}_{data["number"]}'
     for i in data:
         if i == 'bohr_model_image':
             url = data[i]
             r = requests.get(url, allow_redirects=True)
-            path = f'{path_out}{data["name"]}.png'
+            path = f'{path_out}{data["name"]}_{data["number"]}.png'
             open(path, 'wb').write(r.content)
             continue
         if i== 'bohr_model_3d':
@@ -73,13 +76,14 @@ for ui in range(118):
         
         file.close()
 
-    df1 = pd.read_csv(f'{path_out}{data["name"]}.csv')
+    df1 = pd.read_csv(f'{path_out}{data["name"]}_{data["number"]}.csv')
     html_string = df1.to_html()
-    pdfkit.from_string(html_string, f'{path_out}{data["name"]}.pdf')
+    pdfkit.from_string(html_string, f'{path_out}{data["name"]}_{data["number"]}.pdf')
 
     url = data['source']
-    pdfkit.from_url(url, f'{path_out}{data["name"]}_wiki.pdf')
+    pdfkit.from_url(url, f'{path_out}{data["name"]}_{data["number"]}_wiki.pdf')
 
     ul = f'https://images-of-elements.com/{str(data["name"]).lower()}.php'
-    pdfkit.from_url(ul, f'{path_out}{data["name"]}_element.pdf')
-
+    pdfkit.from_url(ul, f'{path_out}{data["name"]}_{data["number"]}_element.pdf')
+    
+    system("cd ..")
